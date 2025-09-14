@@ -1,0 +1,53 @@
+import pandas as pd
+from sklearn.metrics import accuracy_score,precision_score,recall_score,classification_report,confusion_matrix
+from sklearn.linear_model import LogisticRegression
+from sklearn.ensemble import RandomForestClassifier
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split 
+
+
+
+data=pd.read_csv("iris.csv")
+print(data.head(5))
+
+data=data.drop(columns=["Id"])
+
+print(data.head(5))
+print(data["Species"].value_counts())
+print(data.isna().sum())
+print(data.describe())
+rows,cols=data.shape
+print(f"rows={rows}\ncols={cols}")
+data.plot(title="Analysis")
+plt.show()
+
+X=data.iloc[:,0:4]
+Y=data["Species"]
+print(X,Y)
+
+xtrain,xtest,ytrain,ytest=train_test_split(X,Y,test_size=0.25)
+print(xtrain.shape)
+print(xtest.shape)
+print(ytrain.shape)
+print(ytest.shape)
+
+model=LogisticRegression(max_iter=100)
+model.fit(xtrain,ytrain)
+
+
+print("Accuracy:--")
+print("Training Data:-")
+print(model.score(xtrain,ytrain)*100)
+print("Testing Data:-")
+
+
+predict=model.predict(xtest)
+print(accuracy_score(predict,ytest)*100)
+print("Precision Score:---")
+print(precision_score(predict,ytest,average='macro')*100)
+
+print("\n\n\n Classification Report")
+print(classification_report(predict,ytest))
+
+print("\n\n Confusion Matrix")
+print(confusion_matrix(predict,ytest))
