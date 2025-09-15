@@ -1,0 +1,11 @@
+
+---
+
+### 🛠️ **`requirements.txt`** for Car Price Prediction
+
+```txt
+pandas
+numpy
+matplotlib
+seaborn
+scikit-learn
