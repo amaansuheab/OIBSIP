@@ -1,0 +1,13 @@
+# Python bytecode files
+__pycache__/
+*.pyc
+
+# Virtual environment
+env/
+venv/
+
+# Data files
+data/
+
+# .csv files (if too large)
+*.csv
